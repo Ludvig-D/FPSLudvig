@@ -69,9 +69,8 @@ public class FPSController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.C))
             {
-                Instantiate<GameObject>(Block, hit.point + 0.5f * hit.normal, Quaternion.LookRotation(hit.normal, Vector3.up);
+                Instantiate<GameObject>(Block, hit.point + 0.5f * hit.normal, Quaternion.LookRotation(hit.normal, Vector3.up));
             }
-
             if (Input.GetKeyDown(KeyCode.Z))
                 Destroy(hit.transform.gameObject);
         }
