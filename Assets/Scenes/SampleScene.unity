@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -230,9 +230,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cf2279dd3fbd94896cd1cdb9043108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
+  Speed: 3
   Jump: 4
-  Block: {fileID: 37473845786420059, guid: ac0574c8f252ba748a576452bcc186e6, type: 3}
+  Blocks:
+  - {fileID: 1422948183406292554, guid: a3f2148565e6d3046931389a88ef3315, type: 3}
+  - {fileID: 5175279761083918608, guid: d728b453ff382314b8fe132d780175db, type: 3}
+  - {fileID: 37473845786420059, guid: ac0574c8f252ba748a576452bcc186e6, type: 3}
+  - {fileID: 2056941070043246087, guid: c4f6a9c8519ec7a4aa266ed45cb01e88, type: 3}
+  - {fileID: 5385580669725849831, guid: 23e71c03f3a0899489691f1b9f9aa5ff, type: 3}
 --- !u!143 &389372104
 CharacterController:
   m_ObjectHideFlags: 0
