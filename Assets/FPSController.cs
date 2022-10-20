@@ -24,7 +24,7 @@ public class FPSController : MonoBehaviour
     void Update()
     {
         bodyAngle += 10f * Input.GetAxis("Mouse X");
-        headAngle += 10f * Input.GetAxis("Mouse Y");
+        headAngle -= 10f * Input.GetAxis("Mouse Y");
         headAngle = Mathf.Clamp(headAngle, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(0f, bodyAngle, 0f);
