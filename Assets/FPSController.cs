@@ -11,15 +11,19 @@ public class FPSController : MonoBehaviour
     CharacterController charactercontroller;
     Camera headCamera;
     Vector3 velocity = Vector3.zero;
+    Vector2 rotation = Vector2.zero;
     float bodyAngle = 0f;
     float headAngle = 0f;
     int blockIndex = 0;
+    bool flightMode = false;
+
     // Start is called before the first frame update
     void Start()
     {
           charactercontroller = GetComponent<CharacterController>();
           headCamera = GetComponentInChildren<Camera>();
           Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     // Update is called once per frame
@@ -53,15 +57,32 @@ public class FPSController : MonoBehaviour
             forward += Speed;
         if (Input.GetKey(KeyCode.S))
             forward -= Speed;
-        if (charactercontroller.isGrounded)
+        if (flightMode)
         {
             if (Input.GetKey(KeyCode.Space))
-                up += Jump;
+                up += 10;
+            else if (Input.GetKey(KeyCode.LeftShift))
+                up -= 10;
         }
         else
         {
-            up = velocity.y - 9.82f * Time.deltaTime;
+            if (charactercontroller.isGrounded)
+            {
+                if (Input.GetKey(KeyCode.Space))
+                    up += Jump;
+            }
+            else
+            {
+                up = velocity.y - 9.82f * Time.deltaTime;
+            }
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+            flightMode = !flightMode;
+        if (Input.GetKey(KeyCode.LeftControl))
+            Speed = 6;
+        else
+            Speed = 3;
 
         right = Mathf.Lerp(velocity.x, right, 5f * Time.deltaTime);
         forward = Mathf.Lerp(velocity.z, forward, 5f * Time.deltaTime);
@@ -77,13 +98,15 @@ public class FPSController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-              if (Input.GetKey(KeyCode.LeftControl))
-                Instantiate<GameObject>(Blocks[blockIndex], hit.point + 0.5f * hit.normal, Quaternion.LookRotation(hit.normal, Vector3.up));
-              else
-                Instantiate<GameObject>(Blocks[blockIndex], hit.transform.position + hit.normal, hit.transform.rotation);
+                GameObject newBlock;
+                if (Input.GetKey(KeyCode.LeftControl))
+                    newBlock = Instantiate<GameObject>(Blocks[blockIndex], hit.point + 0.5f * hit.normal, Quaternion.LookRotation(hit.normal, Vector3.up));
+                else
+                    newBlock = Instantiate<GameObject>(Blocks[blockIndex], hit.transform.position + hit.normal, hit.transform.rotation);
+                newBlock.transform.SetParent(hit.transform);
             }
             if (Input.GetMouseButtonDown(0))
                 Destroy(hit.transform.gameObject);
         }
-    }
+    }   
 }
